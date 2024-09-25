@@ -1,7 +1,15 @@
 from app import db
+from dataclasses import dataclass
 from datetime import datetime
 
+@dataclass
 class Task(db.Model):
+
+    id:int
+    title: str
+    date: datetime
+    completed: bool
+
     id = db.Column(db.Integer(), primary_key=True)
     title = db.Column(db.String(140))
     date = db.Column(db.DateTime(), default=datetime.now())
