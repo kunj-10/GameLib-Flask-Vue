@@ -5,10 +5,22 @@ const TaskApp = {
     data(){
         return {
             task: "",
-            tasks: [
-                {title: "One"},
-                {title: "Two"}
-            ]
+            tasks: []
+        }
+    },
+    async created(){
+        await this.getTasks()
+    },
+    methods: {
+        async getTasks(){
+            const response = await fetch(window.location, {
+                method: 'get',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+
+            this.tasks = await response.json()
         }
     },
     delimiters: ['{', '}']
